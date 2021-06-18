@@ -23,7 +23,7 @@ class Latest extends Client
      */
     public function getService(): string
     {
-        return self::SERVICES[3];
+        return self::SERVICES[2];
     }
 
     /**
