@@ -1,0 +1,22 @@
+{
+    "name":"planetadeleste/bcu-currency",
+    "description":"Currency API getting from Uruguayan BCU bank",
+    "minimum-stability":"stable",
+    "license":"MIT",
+    "type":"libray",
+    "authors":[
+        {
+            "name":"Alvaro Canepa",
+            "email":"bfpdevel@gmail.com"
+        }
+    ],
+    "require":{
+        "php": "~7.2",
+        "ext-soap": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PlanetaDelEste\\BCUCurrency\\": "src/"
+        }
+    }
+}
