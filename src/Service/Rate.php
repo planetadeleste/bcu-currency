@@ -50,8 +50,6 @@ class Rate extends Client
             ]
         ];
 
-        debug($arParams);
-
         return $this->exec($arParams);
     }
 
