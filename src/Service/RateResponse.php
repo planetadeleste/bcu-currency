@@ -7,24 +7,26 @@ use PlanetaDelEste\BCUCurrency\Service\RateResponse\Output;
 use PlanetaDelEste\BCUCurrency\Service\RateResponse\Status;
 use PlanetaDelEste\BCUCurrency\Service\RateResponse\Item;
 
-/**
- * @method Output getSalida()
- */
 class RateResponse extends Response
 {
     /**
      * @return null|Status
      */
-    public function getStatus()
+    public function getStatus(): ?Status
     {
-        return $this->getSalida() ? $this->getSalida()->respuestastatus : null;
+        return (new Output($this->getOutput()))->getStatus();
     }
 
     /**
-     * @return array|Item[]
+     * @return \PlanetaDelEste\BCUCurrency\Service\RateResponse\Item|\PlanetaDelEste\BCUCurrency\Service\RateResponse\Item[]
      */
     public function getItems()
     {
-        return $this->getSalida() ? $this->getSalida()->datoscotizaciones : [];
+        return (new Output($this->getOutput()))->getItems();
+    }
+
+    public function getOutputKey(): ?string
+    {
+        return null;
     }
 }

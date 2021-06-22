@@ -11,6 +11,11 @@ class LatestResponse extends Response
      */
     public function getFecha(): ?string
     {
-        return $this->getSalida() ? $this->getSalida()->Fecha : null;
+        return $this->getOutput() ? $this->getOutput()->Fecha : null;
+    }
+
+    public function getOutputKey(): ?string
+    {
+        return null;
     }
 }

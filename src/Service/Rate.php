@@ -112,10 +112,7 @@ class Rate extends Client
         if (count($this->arCurrencyCode) === 1) {
             return ['item' => $this->arCurrencyCode[0]];
         }
-
-        return array_map(function ($iCode) {
-            return ['item' => $iCode];
-        }, $this->arCurrencyCode);
+        return ['item' => $this->arCurrencyCode];
     }
 
     /**

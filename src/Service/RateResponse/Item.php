@@ -2,6 +2,8 @@
 
 namespace PlanetaDelEste\BCUCurrency\Service\RateResponse;
 
+use PlanetaDelEste\BCUCurrency\Response;
+
 /**
  * @property string $Fecha
  * @property int    $Moneda
@@ -13,7 +15,11 @@ namespace PlanetaDelEste\BCUCurrency\Service\RateResponse;
  * @property float  $ArbAct
  * @property int    $FormaArbitrar
  */
-class Item
+class Item extends Response
 {
 
+    public function getOutputKey(): ?string
+    {
+        return null;
+    }
 }
