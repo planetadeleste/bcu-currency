@@ -2,6 +2,8 @@
 
 Currency API from Uruguayan BCU bank
 
+[![](https://tokei.rs/b1/github/planetadeleste/bcu-currency)](https://github.com/XAMPPRocky/tokei_rs)
+
 > Inspired in [biller/bcu](https://github.com/biller/bcu) package
 
 ## Installation
