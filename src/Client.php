@@ -30,6 +30,18 @@ abstract class Client
     /** @var int Argentine Peso code */
     const CODE_ARG = 501;
 
+    /** @var int Global US Dollar code */
+    const CODE_GLOBAL_USD = 2222;
+
+    /** @var int Global Euro code */
+    const CODE_GLOBAL_EUR = 1111;
+
+    /** @var int Global Brazil Real code */
+    const CODE_GLOBAL_BRL = 100;
+
+    /** @var int Global Argentine Peso code */
+    const CODE_GLOBAL_ARG = 500;
+
     /** @var int Uruguayan Indexed Unit */
     const CODE_UI = 9800;
 

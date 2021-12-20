@@ -44,9 +44,18 @@ Class `\PlanetaDelEste\BCUCurrency\Service\CurrenciesResponse`
 
 ##### Methods
 
-| Name       | Params | Return  | Description                                  |
-| ---------- | ------ | ------- | -------------------------------------------- |
-| `getItems` |        | `array` | Return an array of items like example bellow |
+| Name       | Params | Return  | Description                                   |
+| ---------- | ------ | ------- | --------------------------------------------- |
+| `getItems` |        | `array` | Return an array of `Item` like example bellow |
+
+###### Properties
+
+>  \PlanetaDelEste\BCUCurrency\Service\Currencies\Item
+
+| Property | Value    | Description          |
+| -------- | -------- | -------------------- |
+| `Codigo` | `int`    | Numeric currecy code |
+| `Nombre` | `string` | Name of currency     |
 
 ```json
 [
@@ -89,19 +98,78 @@ Class `\PlanetaDelEste\BCUCurrency\Service\CurrenciesResponse`
 
 Returns the date of last rate closed
 
+#### Methods
+
+| Name  | Params | Return                                               | Description |
+| ----- | ------ | ---------------------------------------------------- | ----------- |
+| `get` |        | `\PlanetaDelEste\BCUCurrency\Service\LatestResponse` |             |
+
+
+
+#### Usage
+
 ```php
 $obLatest = \PlanetaDelEste\BCUCurrency\Currency::latest();
 $obResponse = $obLatest->get();
 
 $sDate = $obResponse->getFecha();
+print_r($sDate);
 ```
 
-`getFecha()` returns a string with date of last closed rate
-
 #### Response
+
+| Name       | Params | Return   | Description                |
+| ---------- | ------ | -------- | -------------------------- |
+| `getFecha` |        | `string` | Get date in `Y-m-d` format |
 
 `2021-06-17`
 
 ### Get rate
 
 Get rate data of selected currency and dates
+
+> **NAMESPACE** `\PlanetaDelEste\BCUCurrency\Service`
+> 
+> **CLASS** `Rate`
+
+```php
+$obLatest = \PlanetaDelEste\BCUCurrency\Currency::latest()->get();
+$obRate = \PlanetaDelEste\BCUCurrency\Currency::rate();
+$obLocalResponse = $obRate->local()->from($obLatest->getFecha())->usd()->get();
+$obGlobalResponse = $obRate->global()->from($obLatest->getFecha())->usd()->get();
+
+
+print_r($obLocalResponse->getItems());
+print_r($obGlobalResponse->getItems());
+```
+
+#### Methods
+
+| Name     | Params         | Return | Description                                              |
+| -------- | -------------- | ------ | -------------------------------------------------------- |
+| `local`  |                | `Rate` | Get local currencies                                     |
+| `global` |                | `Rate` | Get international currencies                             |
+| `both`   |                | `Rate` | Get both currencies                                      |
+| `from`   | `string`       | `Rate` | Set date from in `Y-m-d` format                          |
+| `to`     | `string`       | `Rate` | Set date to in `Y-m-d` format                            |
+| `ars`    | `bool`         | `Rate` | Set/add Argentine peso currency                          |
+| `brl`    | `bool`         | `Rate` | Set/add Brazilian real currency                          |
+| `usd`    | `bool`         | `Rate` | Set/add USA Dollar currency                              |
+| `eur`    | `bool`         | `Rate` | Set/add EUR currency. Only works with global currencies. |
+| `get`    | `RateResponse` |        |                                                          |
+
+#### Response
+
+Return an array of `\PlanetaDelEste\BCUCurrency\Service\RateResponse\Item` items
+
+| Property        | Value    | Description                  |
+| --------------- | -------- | ---------------------------- |
+| `Fecha`         | `string` | Date of current rate (Y-m-d) |
+| `Moneda`        | `int`    | Currency ID                  |
+| `Nombre`        | `string` | Name of currency             |
+| `CodigoISO`     | `string` | ISO code                     |
+| `Emisor`        | `string` | Emmiter country              |
+| `TCC`           | `float`  | Low value                    |
+| `TCV`           | `float`  | High value                   |
+| `ArbAct`        | `float`  | Arbitrage value              |
+| `FormaArbitrar` | `int`    | Arbitrage format             |

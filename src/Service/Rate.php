@@ -62,7 +62,7 @@ class Rate extends Client
      */
     public function usd(bool $bAdd = false): self
     {
-        $iCode = self::CODE_USD;
+        $iCode = $this->isGlobal() || $this->isBoth() ? self::CODE_GLOBAL_USD : self::CODE_USD;
 
         if ($bAdd) {
             $this->addCurrencyCode($iCode);
@@ -206,6 +206,10 @@ class Rate extends Client
      */
     public function ui(bool $bAdd = false): self
     {
+        if ($this->isGlobal()) {
+            return $this;
+        }
+
         $iCode = self::CODE_UI;
 
         if ($bAdd) {
@@ -236,7 +240,7 @@ class Rate extends Client
      */
     public function ars(bool $bAdd = false): self
     {
-        $iCode = self::CODE_UI;
+        $iCode = $this->isGlobal() || $this->isBoth() ? self::CODE_GLOBAL_ARG : self::CODE_ARG;
 
         if ($bAdd) {
             $this->addCurrencyCode($iCode);
@@ -266,7 +270,7 @@ class Rate extends Client
      */
     public function brl(bool $bAdd = false): self
     {
-        $iCode = self::CODE_BRL;
+        $iCode = $this->isGlobal() || $this->isBoth() ? self::CODE_GLOBAL_BRL : self::CODE_BRL;
 
         if ($bAdd) {
             $this->addCurrencyCode($iCode);
@@ -275,6 +279,65 @@ class Rate extends Client
         }
 
         return $this;
+    }
+
+    /**
+     * Set/Add Euro only for global rates
+     *
+     * @param bool $bAdd
+     *
+     * @return $this
+     */
+    public function eur(bool $bAdd = false): self
+    {
+        if ($this->isLocal()) {
+            return $this;
+        }
+
+        $iCode = self::CODE_GLOBAL_EUR;
+
+        if ($bAdd) {
+            $this->addCurrencyCode($iCode);
+        } else {
+            $this->setCurrencyCode($iCode);
+        }
+
+        return $this;
+    }
+
+    public function addEur(): self
+    {
+        return $this->eur(true);
+    }
+
+    /**
+     * Returns true if current group is local
+     *
+     * @return bool
+     */
+    public function isLocal(): bool
+    {
+        return $this->iGroupID == self::GROUP_LOCAL;
+    }
+
+    /**
+     * Returns true if current group is gloabl
+     *
+     * @return bool
+     */
+    public function isGlobal(): bool
+    {
+        return $this->iGroupID == self::GROUP_GLOBAL;
+    }
+
+    /**
+     * Returns true if current group is local and gloabl
+     *
+     * @return bool
+     */
+    public function isBoth(): bool
+    {
+        return $this->iGroupID == self::GROUP_BOTH;
     }
 
     /**
