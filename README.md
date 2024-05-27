@@ -46,11 +46,11 @@ Class `\PlanetaDelEste\BCUCurrency\Service\CurrenciesResponse`
 
 | Name       | Params | Return  | Description                                   |
 | ---------- | ------ | ------- | --------------------------------------------- |
-| `getItems` |        | `array` | Return an array of `Item` like example bellow |
+| `getItems` |        | `array` | Return an array of `ItemRef` like example bellow |
 
 ###### Properties
 
->  \PlanetaDelEste\BCUCurrency\Service\Currencies\Item
+>  \PlanetaDelEste\BCUCurrency\Service\Currencies\ItemRef
 
 | Property | Value    | Description          |
 | -------- | -------- | -------------------- |
@@ -129,7 +129,7 @@ print_r($sDate);
 Get rate data of selected currency and dates
 
 > **NAMESPACE** `\PlanetaDelEste\BCUCurrency\Service`
-> 
+>
 > **CLASS** `Rate`
 
 ```php
@@ -160,7 +160,7 @@ print_r($obGlobalResponse->getItems());
 
 #### Response
 
-Return an array of `\PlanetaDelEste\BCUCurrency\Service\RateResponse\Item` items
+Return an array of `\PlanetaDelEste\BCUCurrency\Service\RateResponse\ItemRef` items
 
 | Property        | Value    | Description                  |
 | --------------- | -------- | ---------------------------- |
